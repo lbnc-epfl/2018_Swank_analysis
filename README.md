@@ -1,5 +1,5 @@
 # 2018_Swank_models
-This repository contains data and code to accompany the article 'Cell-free gene regulatory network engineering with synthetic transcription factors' by Zoe Swank, Nadanai Laohakunakorn, and Sebastian Josef Maerkl (https://doi.org/10.1101/407999). More information can be found in the paper or on our [lab website](http://lbnc.epfl.ch). 
+This repository contains data and code to accompany the article 'Cell-free gene regulatory network engineering with synthetic transcription factors' by Zoe Swank, Nadanai Laohakunakorn, and Sebastian Josef Maerkl (https://doi.org/10.1101/407999). More information can be found in the paper or on our [lab website](http://lbnc.epfl.ch). Notebooks may be viewed directly in GitHub or using the Jupyter [nbviewer](https://nbviewer.jupyter.org/github/lbnc-epfl/2018_Swank_analysis/tree/master/), which tends to work more reliably. 
 
 ## Requirements
 
@@ -29,7 +29,7 @@ All notebooks and `helper.py` are contained in the top-level directory; addition
 
 ## Data
 
-The `./data` directory contains the following files:
+The `/data/` directory contains the following files:
 
 Cooperative dose response data:
 
@@ -62,4 +62,4 @@ Cooperative repressor characterization plate reader data:
 
 ## Output
 
-All generated plots go to the `./plots` subfolder. MCMC samples go into the `./output` folder. These files may be very large.
+All generated plots go to the `/plots/` subfolder. MCMC samples go into the `/output/` folder. These files may be very large.
