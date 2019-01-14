@@ -82,12 +82,13 @@ def formatplot(ax,xlabel,ylabel,xlim,ylim,logx=False,logy=False,logxy=False,syml
 def plottraces(y1,yerr1,y2,yerr2,y3,yerr3,y4,yerr4,
                titration,name,model_single,model_dual,DIR_PLOTS,
                numberofmodeltraces=50,samples=0,quant=None):
+	# Plot dose response traces (Figure 5)
 
     plt.close("all")
 
     my_dpi=150
 
-    figure_options={'figsize':(8.27,5.83)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
+    figure_options={'figsize':(8,6)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
     font_options={'size':'28','family':'sans-serif','sans-serif':'Arial'}
     plt.rc('figure', **figure_options)
     plt.rc('font', **font_options)
@@ -95,14 +96,14 @@ def plottraces(y1,yerr1,y2,yerr2,y3,yerr3,y4,yerr4,
     current_palette=sns.color_palette("deep", 4)
     plt.rc('axes',prop_cycle=(cycler('color',current_palette)))
     f, axarr=plt.subplots()
-    plt.subplots_adjust(left=0.25,bottom=0.2,right=0.95,top=0.95)
+    plt.subplots_adjust(left=0.3,bottom=0.2,right=0.95,top=0.9)
     
     # Plot data
-    axarr.errorbar(titration,y1,yerr=yerr1,fmt='o',ms=7,label='BCB+ADD coop',color='#C4122C')
-    axarr.errorbar(titration,y2,yerr=yerr2,fmt='^',ms=7,label='BCB+ADD non-coop',color='#228863')
+    axarr.errorbar(titration,y1,yerr=yerr1,fmt='o',ms=12,label='BCB(+)ADD',color='#C4122C')
+    axarr.errorbar(titration,y2,yerr=yerr2,fmt='^',ms=12,label='BCB(-)ADD',color='#228863')
     if (y3.any()!=None and y4.any()!=None and yerr3.any()!=None and yerr4.any()!=None):
-        axarr.errorbar(titration/2,y3,yerr=yerr3,fmt='s',ms=7,label='BCB',color='#28A0A3')
-        axarr.errorbar(titration/2,y4,yerr=yerr4,fmt='D',ms=7,label='ADD',color='#0A719F')
+        axarr.errorbar(titration/2,y3,yerr=yerr3,fmt='s',ms=12,label='BCB',color='#28A0A3')
+        axarr.errorbar(titration/2,y4,yerr=yerr4,fmt='D',ms=12,label='ADD',color='#0A719F')
     else:
         pass
 
@@ -127,9 +128,12 @@ def plottraces(y1,yerr1,y2,yerr2,y3,yerr3,y4,yerr4,
         axarr.plot(modelscale,quant3[1],'-',color='#28A0A3',alpha=1,lw=1.5)
         axarr.plot(modelscale,quant4[1],'-',color='#0A719F',alpha=1,lw=1.5)
 
+        axarr.set_yticks([0,2e3,4e3])
+        axarr.ticklabel_format(style='sci', axis='y', scilimits=(0,0),useMathText=True)
+
         formatplot(axarr,'ZF DNA ratio','deGFP (RFU)', xlim=([-0.05,1.05]),ylim=[0,4600])
 
-        axarr.legend(loc='best', fontsize=15,numpoints=1)
+        axarr.legend(loc='best', fontsize=18,numpoints=1)
         plt.savefig(DIR_PLOTS+name+'.pdf',dpi=my_dpi,transparent=True)
         
     elif samples.any()!=None:
@@ -156,7 +160,7 @@ def plottracesAA(y1,yerr1,y2,yerr2,titration,name,model_dual,
 
     my_dpi=150
 
-    figure_options={'figsize':(8.27,5.83)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
+    figure_options={'figsize':(8,6)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
     font_options={'size':'28','family':'sans-serif','sans-serif':'Arial'}
     plt.rc('figure', **figure_options)
     plt.rc('font', **font_options)
@@ -164,11 +168,11 @@ def plottracesAA(y1,yerr1,y2,yerr2,titration,name,model_dual,
     current_palette=sns.color_palette("deep", 4)
     plt.rc('axes',prop_cycle=(cycler('color',current_palette)))
     f, axarr=plt.subplots()
-    plt.subplots_adjust(left=0.25,bottom=0.2,right=0.95,top=0.95)
+    plt.subplots_adjust(left=0.3,bottom=0.2,right=0.95,top=0.9)
     
     # Plot data
-    axarr.errorbar(titration,y1,yerr=yerr1,fmt='o',ms=7,label='AA-GCN coop',color='#C4122C')
-    axarr.errorbar(titration,y2,yerr=yerr2,fmt='^',ms=7,label='AA-GCN non-coop',color='#228863')
+    axarr.errorbar(titration,y1,yerr=yerr1,fmt='o',ms=12,label='AA-LZ(+)',color='#C4122C')
+    axarr.errorbar(titration,y2,yerr=yerr2,fmt='^',ms=12,label='AA-LZ(-)',color='#228863')
 
     modelscale=np.linspace(0,1,100)
 
@@ -184,9 +188,12 @@ def plottracesAA(y1,yerr1,y2,yerr2,titration,name,model_dual,
         axarr.plot(modelscale,quant1[1],'-',color='#C4122C',alpha=1,lw=1.5)
         axarr.plot(modelscale,quant2[1],'-',color='#228863',alpha=1,lw=1.5)
 
+        axarr.set_yticks([0,2e3,4e3])
+        axarr.ticklabel_format(style='sci', axis='y', scilimits=(0,0),useMathText=True)
+
         formatplot(axarr,'ZF DNA ratio','deGFP (RFU)', xlim=([-0.05,1.05]),ylim=[0,4600])
 
-        axarr.legend(loc='best', fontsize=15,numpoints=1)
+        axarr.legend(loc='best', fontsize=18,numpoints=1)
         plt.savefig(DIR_PLOTS+name+'.pdf',dpi=my_dpi,transparent=True)
         
     elif samples.any()!=None:
@@ -294,7 +301,7 @@ def plottraces3L(df3,x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
 
     my_dpi=150
 
-    figure_options={'figsize':(8.27,5.83)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
+    figure_options={'figsize':(8,6)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
     font_options={'size':'28','family':'sans-serif','sans-serif':'Arial'}
     plt.rc('figure', **figure_options)
     plt.rc('font', **font_options)
@@ -302,12 +309,12 @@ def plottraces3L(df3,x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
     current_palette=sns.color_palette("deep", 4)
     plt.rc('axes',prop_cycle=(cycler('color',current_palette)))
     f, axarr=plt.subplots()
-    plt.subplots_adjust(left=0.25,bottom=0.2,right=0.95,top=0.95)
+    plt.subplots_adjust(left=0.3,bottom=0.2,right=0.95,top=0.9)
     
     # Plot data    
-    axarr.errorbar(df3['Spacing'],df3['Control'],yerr=df3['Cont_err'],fmt='s',ms=7,color='k',label='Unrepressed')    
-    axarr.errorbar(df3['Spacing'],df3['Non-cognate'],yerr=df3['NC_err'],fmt='^',ms=7,color='#0A719F',label='Non-cooperative')
-    axarr.errorbar(df3['Spacing'],df3['Cognate'],yerr=df3['C_err'],fmt='o',ms=7,color='#C4122C',label='Cooperative')
+    axarr.errorbar(df3['Spacing'],df3['Control'],yerr=df3['Cont_err'],fmt='s',ms=12,color='k',label='Unrepressed')    
+    axarr.errorbar(df3['Spacing'],df3['Non-cognate'],yerr=df3['NC_err'],fmt='^',ms=12,color='#0A719F',label='Non-cooperative')
+    axarr.errorbar(df3['Spacing'],df3['Cognate'],yerr=df3['C_err'],fmt='o',ms=12,color='#C4122C',label='Cooperative')
 
     # Plot model
     
@@ -364,7 +371,7 @@ def plottraces3FR(x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
 
     my_dpi=150
 
-    figure_options={'figsize':(8.27,5.83)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
+    figure_options={'figsize':(8,6)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
     font_options={'size':'28','family':'sans-serif','sans-serif':'Arial'}
     plt.rc('figure', **figure_options)
     plt.rc('font', **font_options)
@@ -372,11 +379,11 @@ def plottraces3FR(x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
     current_palette=sns.color_palette("deep", 4)
     plt.rc('axes',prop_cycle=(cycler('color',current_palette)))
     f, axarr=plt.subplots()
-    plt.subplots_adjust(left=0.25,bottom=0.2,right=0.95,top=0.95)
+    plt.subplots_adjust(left=0.3,bottom=0.2,right=0.95,top=0.9)
     
     # Plot data    
-    axarr.errorbar(x,y1,yerr=yerr1,fmt='o',ms=7,color='#C4122C',label='Cooperative')
-    axarr.errorbar(x,y2,yerr=yerr2,fmt='^',ms=7,color='#228863',label='Non-cooperative')
+    axarr.errorbar(x,y1,yerr=yerr1,fmt='o',ms=12,color='#C4122C',label='(+)')
+    axarr.errorbar(x,y2,yerr=yerr2,fmt='^',ms=12,color='#228863',label='(-)')
 
     # Plot model
     
@@ -392,8 +399,8 @@ def plottraces3FR(x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
         axarr.plot(x,quant2[1],'-',color='#228863',alpha=1,lw=1.5,label='__nolegend__')
 
 
-        formatplot(axarr,'spacing (bp)','fold-repression', xlim=([5,32]),ylim=False)
-        axarr.legend(loc='best', fontsize=15,numpoints=1)
+        formatplot(axarr,'spacing (bp)','fold-repression', xlim=([5,32]),ylim=([0,15]))
+        axarr.legend(loc='best', fontsize=18,numpoints=1)
         plt.savefig(DIR_PLOTS+name+'.pdf',dpi=my_dpi,transparent=True)
         
     elif samples.any()!=None:
@@ -430,7 +437,7 @@ def plottraces3CR(x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
 
     my_dpi=150
 
-    figure_options={'figsize':(8.27,5.83)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
+    figure_options={'figsize':(8,6)} #figure size in inches. A4=11.7x8.3. A5=8.27,5.83
     font_options={'size':'28','family':'sans-serif','sans-serif':'Arial'}
     plt.rc('figure', **figure_options)
     plt.rc('font', **font_options)
@@ -438,10 +445,10 @@ def plottraces3CR(x,y0,y1,yerr1,y2,yerr2,name,DIR_PLOTS,
     current_palette=sns.color_palette("deep", 4)
     plt.rc('axes',prop_cycle=(cycler('color',current_palette)))
     f, axarr=plt.subplots()
-    plt.subplots_adjust(left=0.25,bottom=0.2,right=0.95,top=0.95)
+    plt.subplots_adjust(left=0.3,bottom=0.2,right=0.95,top=0.9)
     
     # Plot data    
-    axarr.errorbar(x,y1/y2,yerr=y1/y2*np.sqrt((yerr1/y1)**2+(yerr2/y2)**2),fmt='o',ms=7,color='k')
+    axarr.errorbar(x,y1/y2,yerr=y1/y2*np.sqrt((yerr1/y1)**2+(yerr2/y2)**2),fmt='o',ms=12,color='k')
 
     # Plot model
     
