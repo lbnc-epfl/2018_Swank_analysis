@@ -1,5 +1,5 @@
-# 2018_Swank_analysis
-This repository contains data and code to accompany the article 'Cell-free gene regulatory network engineering with synthetic transcription factors' by Zoe Swank, Nadanai Laohakunakorn, and Sebastian Josef Maerkl (https://doi.org/10.1101/407999). More information can be found in the paper or on our [lab website](http://lbnc.epfl.ch). Notebooks may be viewed directly in GitHub or using the Jupyter [nbviewer](https://nbviewer.jupyter.org/github/lbnc-epfl/2018_Swank_analysis/tree/master/), which tends to work more reliably. 
+# 2019_Swank_analysis
+This repository contains data and code to accompany the article 'Cell-free gene regulatory network engineering with synthetic transcription factors' by Zoe Swank, Nadanai Laohakunakorn, and Sebastian J. Maerkl (https://doi.org/10.1101/407999). More information can be found in the paper or on our [lab website](http://lbnc.epfl.ch). Notebooks may be viewed directly in GitHub or using the Jupyter [nbviewer](https://nbviewer.jupyter.org/github/lbnc-epfl/2019_Swank_analysis/tree/master/), which tends to work more reliably. 
 
 ## Requirements
 
